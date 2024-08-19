@@ -1,0 +1,91 @@
+:root {
+  --strong-gray1: #212529;
+  --strong-gray2: #343A40;
+  --strong-gray3: #495057;
+  --gray1: #6C757D;
+  --gray2: #ADB5BD;
+  --light-gray1: #CED4DA;
+  --light-gray2: #DEE2E6;
+  --strong-white: #E9ECEF;
+  --white: #F8F9FA;
+
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body, input {
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  background-color: var(--strong-gray2);
+  color: var(--white);
+}
+
+main {
+  background-color: var(--light-gray2);
+  height: 100vh;
+}
+
+#caixaTituloPagina {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & i {
+    font-size: 3rem;
+  }
+
+  & h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+}
+
+#blocoPesquisa {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  font-size: 2rem;
+
+  & .caixa-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    & input {
+      font-size: 1.6rem;
+      padding: 0.75rem;
+      border-radius: 1rem;
+      border: none;
+      box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    & #inputNome {
+      width: 40rem;
+    }
+  }
+  
+  & button {
+    font-size: 2rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+}

@@ -23,6 +23,13 @@ html {
 
 body, input {
   font-family: "Montserrat", sans-serif;
+  color: var(--strong-gray2);
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
 }
 
 header {
@@ -33,10 +40,6 @@ header {
   color: var(--white);
 }
 
-main {
-  background-color: var(--light-gray2);
-  height: 100vh;
-}
 
 #caixaTituloPagina {
   display: flex;
@@ -87,5 +90,17 @@ main {
     border: none;
     background-color: white;
     box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+main {
+  background-color: var(--light-gray2);
+  text-align: center;
+  flex-grow: 1;
+  padding: 1rem;
+
+  & h2 {
+    font-size: 2rem;
+    font-weight: 600;
   }
 }

@@ -1,0 +1,39 @@
+:root {
+  --strong-gray1: #212529;
+  --strong-gray2: #343A40;
+  --strong-gray3: #495057;
+  --gray1: #6C757D;
+  --gray2: #ADB5BD;
+  --light-gray1: #CED4DA;
+  --light-gray2: #DEE2E6;
+  --strong-white: #E9ECEF;
+  --white: #F8F9FA;
+
+}
+
+#modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+#fundoModal {
+  position: absolute;
+  background-color: var(--strong-gray1);
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  backdrop-filter: blur(1px);
+}
+
+#containerModal {
+  z-index: 1;
+  background-color: var(--light-gray2);
+  padding: 2rem;
+  border-radius: 2rem;
+}

@@ -1,5 +1,3 @@
-const key = '55c17dd5';
-
 const fundoModal = document.getElementById('fundoModal');
 const modal = document.getElementById('modal');
 
@@ -19,12 +17,17 @@ botaoBusca.addEventListener('click', async function () {
     const response = await fetch(url);
     const data = await response.json();
     console.log('data: ', data);
-    console.log(inputAno.value);
+    if (data.Error) {
+      throw new Error('Filme não encontrado!');
+    }
 
     modal.classList.remove('fechado');
     modal.classList.add('aberto');
   } catch (error) {
-    console.error(error.message);
+    notie.alert({
+      type: 'error',
+      text: error.message,
+    });
   }
 })
 

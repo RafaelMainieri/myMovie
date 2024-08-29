@@ -1,5 +1,6 @@
 const fundoModal = document.getElementById('fundoModal');
 const modal = document.getElementById('modal');
+const containerModal = document.getElementById('containerModal')
 
 const inputNome = document.getElementById('inputNome')
 const inputAno = document.getElementById('inputAno')
@@ -11,16 +12,19 @@ fundoModal.addEventListener('click', function () {
 })
 
 botaoBusca.addEventListener('click', async function () {
+
   try {
     let url = `http://www.omdbapi.com/?apikey=${key}&t=${tratarInputNome()}&y=${tratarInputAno()}`;
 
     const response = await fetch(url);
     const data = await response.json();
     console.log('data: ', data);
+
     if (data.Error) {
       throw new Error('Filme não encontrado!');
     }
 
+    criarModal(data);
     modal.classList.remove('fechado');
     modal.classList.add('aberto');
   } catch (error) {
@@ -49,5 +53,37 @@ function tratarInputAno() {
   } else {
     return inputAno.value;
   }
+}
+
+function criarModal(data) {
+  containerModal.innerHTML = `
+  <h2>${data.Title} - ${data.Year}</h2>
+
+  <section id="infosFilme">
+    <img 
+      id="posterFilme"
+      src="${data.Poster}" 
+      alt="Poster do filme"
+    >
+
+    <div id="textoFilme">
+      <div id="resumoFilme">
+        <h3>Resumo</h3>
+        <p>${data.Plot}</p>
+      </div>
+
+      <div id="elencoFilme">
+        <h3>Elenco</h3>
+        <p>${data.Actors}</p>
+      </div>
+
+      <div id="generoFilme">
+        <h3>Gênero</h3>
+        <p>${data.Genre}</p>
+      </div>
+    </div>
+  </section>
+
+  <button id="botaoAdicionar">Adicionar à Lista</button>`
 }
 

@@ -103,4 +103,42 @@ main {
     font-size: 2rem;
     font-weight: 600;
   }
+
+  & #listaFilmes {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+
+    & .caixaFilme {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: 1rem;
+
+      & img {
+        border-radius: 1rem;
+        box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.15);
+      }
+
+      & button {
+        font-size: 1.4rem;
+        padding: 0.5rem 2rem;
+        border: none;
+        background-color: #F94144;
+        color: var(--white);
+        border-bottom: 2px solid #9e292b;
+        border-right: 2px solid #9e292b;
+        border-radius: 0.75rem;
+
+        &:hover {
+          border: 1px solid #9e292b;
+          /* border-top: 2px solid #9e292b; */
+          /* border-left: 2px solid #9e292b; */
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

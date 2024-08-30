@@ -1,32 +1,28 @@
-const fundoModal = document.getElementById('fundoModal');
-const modal = document.getElementById('modal');
-const containerModal = document.getElementById('containerModal')
-
 const inputNome = document.getElementById('inputNome')
 const inputAno = document.getElementById('inputAno')
 const botaoBusca = document.getElementById('botaoBusca')
+const containerListaFilmes = document.getElementById('listaFilmes')
 
-fundoModal.addEventListener('click', function () {
-  modal.classList.remove('aberto')
-  modal.classList.add('fechado')
-})
+let listaFilmes = [];
 
 botaoBusca.addEventListener('click', async function () {
-
+  // Tenta se conectar com a API com as informações passadas nos inputs
   try {
     let url = `http://www.omdbapi.com/?apikey=${key}&t=${tratarInputNome()}&y=${tratarInputAno()}`;
 
     const response = await fetch(url);
     const data = await response.json();
-    console.log('data: ', data);
+    console.log('Objeto: ', data);
 
+    // Se a resposta da API foi um erro, devolve essa mensagem de erro
     if (data.Error) {
       throw new Error('Filme não encontrado!');
     }
 
+    // Se a resposta da API for um sucesso, cria o modal e abre ele na tela 
     criarModal(data);
-    modal.classList.remove('fechado');
-    modal.classList.add('aberto');
+    abrirModal();
+    // Se não conseguir se conectar com a API, ou seja, se cair dentro do if ↑ e voltar um erro, cai dentro desse catch e notifica o usuario de que o o filme não foi encontrado
   } catch (error) {
     notie.alert({
       type: 'error',
@@ -55,35 +51,27 @@ function tratarInputAno() {
   }
 }
 
-function criarModal(data) {
-  containerModal.innerHTML = `
-  <h2>${data.Title} - ${data.Year}</h2>
+// Adiciona o objeto do filme (completo) na lista
+function addLista(objetoDoFilme) {
+  listaFilmes.push(objetoDoFilme);
+}
 
-  <section id="infosFilme">
+
+
+// Atualiza a tela adicionando o filme dentro do container
+function atualizarTela(objetoDoFilme) {
+  containerListaFilmes.innerHTML += `
+  <div class="caixaFilme">
     <img 
-      id="posterFilme"
-      src="${data.Poster}" 
-      alt="Poster do filme"
+      src="${objetoDoFilme.Poster}" 
+      alt="Poster do Filme ${objetoDoFilme.Title}"
     >
 
-    <div id="textoFilme">
-      <div id="resumoFilme">
-        <h3>Resumo</h3>
-        <p>${data.Plot}</p>
-      </div>
-
-      <div id="elencoFilme">
-        <h3>Elenco</h3>
-        <p>${data.Actors}</p>
-      </div>
-
-      <div id="generoFilme">
-        <h3>Gênero</h3>
-        <p>${data.Genre}</p>
-      </div>
-    </div>
-  </section>
-
-  <button id="botaoAdicionar">Adicionar à Lista</button>`
+    <button class="botaoRemover">
+      <i class="bi bi-trash"></i> Remover
+    </button>
+  </div>`
 }
+
+
 

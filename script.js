@@ -56,6 +56,13 @@ function addLista(objetoDoFilme) {
   listaFilmes.push(objetoDoFilme);
 }
 
+function removerFilme(idDoFilme) {
+  listaFilmes = listaFilmes.filter(filme => filme.imdbID !== idDoFilme);
+  // retorna uma nova lista filtrada onde tem todos os filmes que nao tem o id informado como parametro
+
+  document.getElementById(`${idDoFilme}`).remove();
+}
+
 function isFilmeNaLista(idDoFilme) {
   function isIdDoFilmeNaLista(objetoDoFilme) {
     return objetoDoFilme.imdbID === idDoFilme;
@@ -68,13 +75,13 @@ function isFilmeNaLista(idDoFilme) {
 // Atualiza a tela adicionando o filme dentro do container
 function atualizarTela(objetoDoFilme) {
   containerListaFilmes.innerHTML += `
-  <div class="caixaFilme">
+  <div id="${objetoDoFilme.imdbID}" class="caixaFilme">
     <img 
       src="${objetoDoFilme.Poster}" 
       alt="Poster do Filme ${objetoDoFilme.Title}"
     >
 
-    <button class="botaoRemover">
+    <button class="botaoRemover" onclick="removerFilme('${objetoDoFilme.imdbID}')">
       <i class="bi bi-trash"></i> Remover
     </button>
   </div>`

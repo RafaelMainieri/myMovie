@@ -56,7 +56,14 @@ function addLista(objetoDoFilme) {
   listaFilmes.push(objetoDoFilme);
 }
 
-
+function isFilmeNaLista(idDoFilme) {
+  function isIdDoFilmeNaLista(objetoDoFilme) {
+    return objetoDoFilme.imdbID === idDoFilme;
+    // se o id do pertencer ao filme retorna true, se nao retorna false
+  }
+  return Boolean(listaFilmes.find(isIdDoFilmeNaLista));
+  // percorre toda a listaFilmes, se encontrar algum id que pertence ao filme que está na lista, retorna o objeto do filme, se nao, retorna undefined. Transformando essa operação pra boolean se consegue os valores true (para o objeto) e false (para undefined)
+}
 
 // Atualiza a tela adicionando o filme dentro do container
 function atualizarTela(objetoDoFilme) {

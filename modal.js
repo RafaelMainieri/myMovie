@@ -9,7 +9,13 @@ fundoModal.addEventListener('click', fecharModal)
 
 // Atualiza a lista e atualiza a interface da página
 function addFilmeAtualNaLista() {
-
+  if (isFilmeNaLista(filmeAtual.imdbID)) {
+    notie.alert({
+      type: 'error',
+      text: 'Filme ja está na sua lista!',
+    });
+    return;
+  }
   addLista(filmeAtual);
   atualizarTela(filmeAtual);
   fecharModal();

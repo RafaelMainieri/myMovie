@@ -3,7 +3,13 @@ const inputAno = document.getElementById('inputAno')
 const botaoBusca = document.getElementById('botaoBusca')
 const containerListaFilmes = document.getElementById('listaFilmes')
 
-let listaFilmes = [];
+// Se for a variavel listaFilmes = null, ele usa a lista vazia []
+let listaFilmes = JSON.parse(localStorage.getItem('listaFilmes')) ?? [];
+
+// Loop para ler os filmes que estao no localStorage e carregar eles na tela
+for (const filme of listaFilmes) {
+  atualizarTela(filme);
+}
 
 botaoBusca.addEventListener('click', async function () {
   // Tenta se conectar com a API com as informações passadas nos inputs
@@ -56,13 +62,17 @@ function addLista(objetoDoFilme) {
   listaFilmes.push(objetoDoFilme);
 }
 
+// Remove o filme da lista e da tela
 function removerFilme(idDoFilme) {
   listaFilmes = listaFilmes.filter(filme => filme.imdbID !== idDoFilme);
   // retorna uma nova lista filtrada onde tem todos os filmes que nao tem o id informado como parametro
 
   document.getElementById(`${idDoFilme}`).remove();
+
+  atualizarLocalStorage();
 }
 
+// Verifica se o filme esta na lista (procurando pelo id), retornando true or false
 function isFilmeNaLista(idDoFilme) {
   function isIdDoFilmeNaLista(objetoDoFilme) {
     return objetoDoFilme.imdbID === idDoFilme;
@@ -85,6 +95,12 @@ function atualizarTela(objetoDoFilme) {
       <i class="bi bi-trash"></i> Remover
     </button>
   </div>`
+}
+
+
+function atualizarLocalStorage() {
+  // Transforma os objetos do filme em texto e salva eles dentro da lista "listaFilmes" no LocalStorage
+  localStorage.setItem('listaFilmes', JSON.stringify(listaFilmes))
 }
 
 

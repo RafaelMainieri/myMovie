@@ -18,6 +18,7 @@ function addFilmeAtualNaLista() {
   }
   addLista(filmeAtual);
   atualizarTela(filmeAtual);
+  atualizarLocalStorage();
   fecharModal();
 }
 

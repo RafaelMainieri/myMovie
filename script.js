@@ -63,9 +63,9 @@ function addLista(objetoDoFilme) {
 }
 
 // Remove o filme da lista e da tela
-function removerFilme(idDoFilme) {
+function removerFilme(idDoFilme, nomeDoFilme) {
   notie.confirm({
-    text: 'Deseja remover o filme da sua lista?',
+    text: `Deseja remover o filme ${nomeDoFilme} da sua lista?`,
     submitText: 'Sim',
     cancelText: 'Não',
     submitCallback: function remover() {
@@ -94,12 +94,14 @@ function isFilmeNaLista(idDoFilme) {
 function atualizarTela(objetoDoFilme) {
   containerListaFilmes.innerHTML += `
   <div id="${objetoDoFilme.imdbID}" class="caixaFilme">
-    <img 
-      src="${objetoDoFilme.Poster}" 
-      alt="Poster do Filme ${objetoDoFilme.Title}"
-    >
+    <div class="containerPoster">
+      <img 
+        src="${objetoDoFilme.Poster}" 
+        alt="Poster do Filme ${objetoDoFilme.Title}"
+      >
+    </div>
 
-    <button class="botaoRemover" onclick="removerFilme('${objetoDoFilme.imdbID}')">
+    <button class="botaoRemover" onclick="removerFilme('${objetoDoFilme.imdbID}', '${objetoDoFilme.Title}')">
       <i class="bi bi-trash"></i> Remover
     </button>
   </div>`

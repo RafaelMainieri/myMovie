@@ -64,12 +64,20 @@ function addLista(objetoDoFilme) {
 
 // Remove o filme da lista e da tela
 function removerFilme(idDoFilme) {
-  listaFilmes = listaFilmes.filter(filme => filme.imdbID !== idDoFilme);
-  // retorna uma nova lista filtrada onde tem todos os filmes que nao tem o id informado como parametro
+  notie.confirm({
+    text: 'Deseja remover o filme da sua lista?',
+    submitText: 'Sim',
+    cancelText: 'Não',
+    submitCallback: function remover() {
+      listaFilmes = listaFilmes.filter(filme => filme.imdbID !== idDoFilme);
+      // retorna uma nova lista filtrada onde tem todos os filmes que nao tem o id informado como parametro
 
-  document.getElementById(`${idDoFilme}`).remove();
+      document.getElementById(`${idDoFilme}`).remove();
 
-  atualizarLocalStorage();
+      atualizarLocalStorage();
+    }
+  })
+
 }
 
 // Verifica se o filme esta na lista (procurando pelo id), retornando true or false
